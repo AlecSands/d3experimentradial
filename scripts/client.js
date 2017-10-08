@@ -26,9 +26,12 @@ var stratify = d3.stratify()
 
 d3.csv("https://raw.githubusercontent.com/AlecSands/lol_data_experiment/master/data/test.csv", function(error, data) {
   if (error) throw error;
+  console.log('data:', data);
 
   var root = stratify(data)
       .sort(function(a, b) { return (a.height - b.height) || a.id.localeCompare(b.id); });
+
+  console.log('root:', root);
 
   tree(root);
 
