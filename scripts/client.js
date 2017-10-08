@@ -21,7 +21,14 @@ window.onload = function () {
     var treeData =
       {
         "name": "Champions",
-        "children": []
+        "children": [
+          {"name": "Marksman", "children": []},
+          {"name": "Support", "children": []},
+          {"name": "Tank", "children": []},
+          {"name": "Fighter", "children": []},
+          {"name": "Assassin", "children": []},
+          {"name": "Mage", "children": []}
+        ]
       };
 
     console.log('myData inside .onload:', myData);
@@ -36,7 +43,23 @@ window.onload = function () {
         var newSpell = {"name": myData.data[variable].spells[i].name}
         newChild.children.push(newSpell);
       }
-      treeData.children.push(newChild);
+      var selectRole = myData.data[variable].tags[0]
+      if (selectRole == "Marksman") {
+        console.log('match on Marksman');
+        treeData.children[0].children.push(newChild);
+      } else if (selectRole == "Support") {
+        console.log('match on Support');
+        treeData.children[1].children.push(newChild);
+      } else if (selectRole == "Tank") {
+        treeData.children[2].children.push(newChild);
+      } else if (selectRole == "Fighter") {
+        treeData.children[3].children.push(newChild);
+      } else if (selectRole == "Assassin") {
+        treeData.children[4].children.push(newChild);
+      } else if (selectRole == "Mage") {
+        treeData.children[5].children.push(newChild);
+      }
+
     }
 
     console.log('treeData after loop:', treeData);
@@ -58,8 +81,8 @@ window.onload = function () {
 
     // Set the dimensions and margins of the diagram
     var margin = {top: 20, right: 90, bottom: 30, left: 90},
-        width = 960 - margin.left - margin.right,
-        height = 3000 - margin.top - margin.bottom;
+        width = 2000 - margin.left - margin.right,
+        height = 6000 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     // appends a 'group' element to 'svg'
@@ -86,7 +109,7 @@ window.onload = function () {
     root.y0 = 0;
 
     // Collapse after the second level
-    root.children.forEach(collapse);
+    // root.children.forEach(collapse);
 
     update(root);
 
